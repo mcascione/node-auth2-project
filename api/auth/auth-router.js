@@ -19,6 +19,7 @@ router.post("/register", validateRoleName, (req, res, next) => {
 router.post("/login", checkUsernameExists, (req, res, next) => {
   if (bcrypt.compareSync(req.body.password, req.user.password)) {
     const token = generateToken(req.user);
+    console.log(token);
     res.status(200).json({
       message: `${req.user.username} is back!`,
       token,
@@ -32,7 +33,7 @@ function generateToken(user) {
   const payload = {
     subject: user.user_id,
     username: user.username,
-    role: user.role_name,
+    role_name: user.role_name,
   };
   const options = {
     expiresIn: "1d",

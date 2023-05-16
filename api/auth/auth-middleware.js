@@ -20,7 +20,7 @@ const restricted = (req, res, next) => {
 };
 
 const only = (role_name) => (req, res, next) => {
-  if (req.decodedJWT.role && req.decodedJWT.role === role_name) {
+  if (req.decodedJWT.role_name && req.decodedJWT.role_name === role_name) {
     next();
   } else {
     next({ status: 403, message: "This is not for you" });
